@@ -1,0 +1,6 @@
+create_table("alert") {
+  t.Column("alertid", "integer", {primary:true})
+  t.Column("price", "integer", {})
+  t.Column("status", "string", {})
+  t.DisableTimestamps()
+}

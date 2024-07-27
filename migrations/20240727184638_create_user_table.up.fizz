@@ -1,0 +1,7 @@
+create_table("users") {
+  t.Column("userid", "integer", {primary:true})
+  t.Column("username", "string", {"size":50})
+  t.Column("password", "string", {})
+  t.DisableTimestamps()
+}
+
