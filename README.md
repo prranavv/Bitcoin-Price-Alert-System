@@ -1,6 +1,6 @@
 # BTC Alert System
 
-To run this app,first git clone this repo. Then pull a postgres docker image inside your machine. Use the following command `docker run --name some-postgres -e POSTGRES_PASSWORD=pranav -d postgres`. Then inside the root of the directory run `make run`. This will start the app.Also run `soda migrate up` to do the database migrations.If soda is not available on your machine run `brew install gobuffalo/tap/pop` and you can run the previous command to do the database migrations. 
+To run this app,first git clone this repo. Then pull a postgres docker image inside your machine. Use the following command `docker run --name some-postgres -e POSTGRES_PASSWORD=pranav -d postgres`. Then inside the root of the directory run `make run`. This will start the app.Also run `soda migrate up` to do the database migrations.If soda is not available on your machine run `brew install gobuffalo/tap/pop` and you can run the previous command to do the database migrations.Make an database.yml file that specifies the config of the database. An example file has been shown in datbase.example.yml. 
 
 ## EndPoints
 
