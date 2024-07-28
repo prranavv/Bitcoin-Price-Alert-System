@@ -2,8 +2,8 @@ development:
   dialect: postgres
   database: postgres
   user: postgres
-  password: password
-  host: postgress
+  password: pranav
+  host: 127.0.0.1
   pool: 5
 
 test:
