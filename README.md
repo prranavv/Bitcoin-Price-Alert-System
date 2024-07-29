@@ -5,14 +5,35 @@ To run this app,first git clone this repo. Then pull a postgres docker image ins
 ## EndPoints
 
 
-**/register** - Registers an user to the database.
+**/register** - Registers an user to the database. Example of request body 
+```
+{
+  "username":"vk",
+  "password":"vk"
+}
+```
 
-**/login** - Logins a user to the database. Without loggin in one cannot do anything.
+**/login** - Logins a user to the database. Without loggin in one cannot do anything.Example of request body 
+```
+{
+  "username":"vk",
+  "password":"vk"
+}
+```
 
-**/alerts/create** - Creates an alert in the database. Make sure the request body has a Price in it.
+**/alerts/create** - Creates an alert in the database. Make sure the request body has a Price in it.Example of request body 
+```
+{
+  "price":5342
+}
+```
 
-**/alerts/delete** - Marks an alert as deleted in the status section. Make sure to give the AlertID in the request body.
-
+**/alerts/delete** - Marks an alert as deleted in the status section. Make sure to give the AlertID in the request body.Example of request body 
+```
+{
+  "alertid":2
+}
+```
 **/alerts/list** - Lists all the alerts
 
 
