@@ -11,6 +11,8 @@ The Current price of BTC is {}
 I have made the app in such a way that the Current Price of BTC is shown every minute to make testing of the app easier.
 
 
+![alt.text](image.png)
+
 ## EndPoints
 
 
