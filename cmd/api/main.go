@@ -9,7 +9,7 @@ import (
 func main() {
 	db, err := ConnectDB()
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 	go checkPrices(db)
 	handler := NewHandler(db)

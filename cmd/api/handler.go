@@ -24,6 +24,7 @@ func (h *Handler) handleRegisterUser(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
+	fmt.Fprintf(w, "User created with provided credentials")
 }
 
 // NewHandler returns a pointer to a Handler
@@ -43,12 +44,10 @@ func (h *Handler) handleLogin(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(expectedpassword)
 	if expectedpassword != credential.Password {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	fmt.Println(32)
 	expirationtime := time.Now().Add(time.Minute * 5)
 	claims := &Claims{
 		Username: credential.Username,
@@ -67,7 +66,7 @@ func (h *Handler) handleLogin(w http.ResponseWriter, r *http.Request) {
 		Value:   tokenString,
 		Expires: expirationtime,
 	})
-	fmt.Println("Logged in")
+	fmt.Fprintln(w, "Logged in as user", credential.Username)
 }
 
 // handleCreateAlert is a function that creates an alert for the user.
@@ -82,6 +81,7 @@ func (h *Handler) handleCreateAlert(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
+	fmt.Fprintln(w, "Alert created with waiting price of", req.Price)
 }
 
 // handleDeleteAlert is a function deletes an alert that is given in the request
@@ -95,7 +95,9 @@ func (h *Handler) handleDeleteAlert(w http.ResponseWriter, r *http.Request) {
 	err = h.Db.UpdatingFromAlert(req.AlertID, "Deleted")
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
+	fmt.Fprintf(w, "AlertID-%d status changed to Deleted", req.AlertID)
 }
 
 // handleListAlerts is a function lists all alerts.
@@ -108,7 +110,7 @@ func (h *Handler) handleListAlerts(w http.ResponseWriter, r *http.Request) {
 	i := 0
 	for _, alert := range alerts {
 		i++
-		fmt.Printf("%d. AlertID-%d Price-%d Status-%s \n", i, alert.AlertID, alert.Price, alert.Status)
+		fmt.Fprintf(w, "%d. AlertID-%d Price-%d Status-%s \n", i, alert.AlertID, alert.Price, alert.Status)
 	}
 
 }

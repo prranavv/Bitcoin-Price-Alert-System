@@ -22,7 +22,7 @@ func checkPrices(db *DB) {
 		}
 
 		currentPrice := priceResp.Bitcoin.USD
-		fmt.Println("The Current Price of BTC is ", currentPrice)
+		fmt.Println("The Current Price of BTC is", currentPrice)
 		alerts, err := db.GettingFromAlert()
 		if err != nil {
 			fmt.Println(err)
