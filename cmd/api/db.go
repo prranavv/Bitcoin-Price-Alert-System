@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -31,7 +32,7 @@ func ConnectDB() (*DB, error) {
 		log.Fatal("Error loading .env file")
 		return nil, err
 	}
-	dsn := os.Getenv("DATABASE_URL")
+	dsn := fmt.Sprintf("host=postgres port=5432 user=%s password=%s dbname=%s sslmode=disable timezone=UTC connect_timeout=5", os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"))
 	counts := 0
 	for {
 		connection, err := openDB(dsn)
