@@ -3,9 +3,11 @@ package main
 import (
 	"database/sql"
 	"log"
+	"os"
 	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/joho/godotenv"
 )
 
 var DBConn = &DB{}
@@ -24,7 +26,12 @@ func openDB(dsn string) (*DB, error) {
 }
 
 func ConnectDB() (*DB, error) {
-	dsn := "host=localhost port=5432 user=postgres password=pranav dbname=postgres sslmode=disable timezone=UTC connect_timeout=5"
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+		return nil, err
+	}
+	dsn := os.Getenv("DATABASE_URL")
 	counts := 0
 	for {
 		connection, err := openDB(dsn)
