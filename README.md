@@ -1,6 +1,15 @@
 # BTC Alert System
 
-To run this app,first git clone this repo. Then pull a postgres docker image inside your machine. Use the following command `docker run --name some-postgres -e POSTGRES_PASSWORD=pranav -p 5432:5432 -d postgres`.If soda is not available on your machine run `brew install gobuffalo/tap/pop`.Edit the database.yml file that specifies the config of the database and you can run `soda migrate up` to do the database migrations. Then inside the root of the directory run `make run`. This will start the app.Docker Compose.
+To run this app,first git clone this repo and then cd into it.Make sure your docker daemon is running and there is nothing running in port 8000 and port 5432.If there is something running on one of these ports say,5432, run `sudo lsof -i:5432` and figure out the ID(Lets say 1234) of the process running on that port. Then run `sudo kill 1234` to kill that particular process.Now that both of these ports are free, run `docker compose up --build` in the root directory.After the containers are up and running you should see the following on the terminal 
+
+```
+Server running on 8000
+Connected to Postgres
+The Current price of BTC is {}
+```
+
+I have made the app in such a way that the Current Price of BTC is shown every minute to make testing of the app easier.
+
 
 ## EndPoints
 
