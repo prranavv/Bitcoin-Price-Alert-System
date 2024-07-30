@@ -41,7 +41,7 @@ func (h *Handler) handleLogin(w http.ResponseWriter, r *http.Request) {
 	}
 	expectedpassword, err := h.Db.GettingFromUser(credential.Username)
 	if err != nil {
-		fmt.Println(err)
+		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 	if expectedpassword != credential.Password {
@@ -75,11 +75,14 @@ func (h *Handler) handleCreateAlert(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		fmt.Println("Error Occured at Decoding ")
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 	err = h.Db.AddingToAlert(req.Price, "Created")
 	if err != nil {
 		fmt.Println(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 	fmt.Fprintln(w, "Alert created with waiting price of", req.Price)
 }
@@ -90,11 +93,13 @@ func (h *Handler) handleDeleteAlert(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		fmt.Println("Error Occured at Decoding ")
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 	err = h.Db.UpdatingFromAlert(req.AlertID, "Deleted")
 	if err != nil {
 		fmt.Println(err)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 	fmt.Fprintf(w, "AlertID-%d status changed to Deleted", req.AlertID)
@@ -105,6 +110,7 @@ func (h *Handler) handleListAlerts(w http.ResponseWriter, r *http.Request) {
 	alerts, err := h.Db.GettingFromAlert()
 	if err != nil {
 		fmt.Println("Error", err)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 	i := 0
